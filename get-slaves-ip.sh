@@ -11,4 +11,4 @@ instance_ids=$( aws --region ${region} \
 
 aws --region ${region} --output text  \
     --query "Reservations[*].Instances[*].PrivateIpAddress" ec2 describe-instances \
-    --instance-ids ${instance_ids} | sed "s/\t/,/"
+    --instance-ids ${instance_ids} | tr "\n" ","|  sed "s/\t/,/" | sed "s/,$//"
