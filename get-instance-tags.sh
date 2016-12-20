@@ -1,9 +1,9 @@
 #!/bin/sh
 
-if [ -f /usr/bin/yum ]
-then
-  sudo yum install -y aws-cli
-fi
+#if [ -f /usr/bin/yum ]
+#then
+#  sudo yum install -y aws-cli
+#fi
 
 INSTANCE_ID=$( curl --silent http://169.254.169.254/latest/meta-data/instance-id )
 REGION=$( curl --silent http://169.254.169.254/latest/meta-data/placement/availability-zone | sed 's/.$//' )
