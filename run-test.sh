@@ -6,6 +6,17 @@ SLAVEIPS=$( /usr/local/bin/get-slaves-ip.sh )
 REPORTDIR=$( mktemp -d -p /logs)
 LOGFILE=${REPORTDIR}.log
 
+# distribute input-data
+export IFS=","
+for slave in ${SLAVEIPS}
+do
+  echo -en "Processing $slave"
+  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /input-data/* ${slave}:/input-data/ 2>&1 1>/dev/null
+  echo "."
+done
+unset IFS
+
+
 count=$( docker ps -a | wc -l )
 if [ $count -gt 1 ]
 then
