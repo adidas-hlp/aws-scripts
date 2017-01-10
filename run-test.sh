@@ -8,7 +8,7 @@ LOGFILE=${REPORTDIR}.log
 
 docker rm master
 
-if [ $? -eq 0]
+if [ $? -eq 0 ]
 then		
   docker run --rm -it --name master -v /input-data:/input-data -v /logs/:/logs --rm -p 60000:60000 --name master confirmed/jmeter-master \
     /var/lib/apache-jmeter/bin/jmeter -n -t /input-data/${TESTSCRIPT} -l ${LOGFILE} -e -o ${REPORTDIR} \
