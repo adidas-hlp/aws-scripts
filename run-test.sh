@@ -11,7 +11,7 @@ export IFS=","
 for slave in ${SLAVEIPS}
 do
   echo -en "Processing $slave"
-  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /input-data/* ${slave}:/input-data/ 2>&1 1>/dev/null
+  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /input-data/* ${slave}:/input-data/ >/dev/null 2>&1
   echo "."
 done
 unset IFS
@@ -31,3 +31,5 @@ fi
 docker run --rm -it --name master -v /input-data:/input-data -v /logs/:/logs --rm -p 60000:60000 --name master confirmed/jmeter-master \
     /var/lib/apache-jmeter/bin/jmeter -n -t /input-data/${TESTSCRIPT} -l ${LOGFILE} -e -o ${REPORTDIR} \
     -Djava.rmi.server.hostname=${SERVERIP} -Dclient.rmi.localport=60000 -R${SLAVEIPS} 
+
+chmod -R 755 ${REPORTDIR}
