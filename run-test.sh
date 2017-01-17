@@ -32,4 +32,4 @@ docker run --rm -it --name master -v /input-data:/input-data -v /logs/:/logs --r
     /var/lib/apache-jmeter/bin/jmeter -n -t /input-data/${TESTSCRIPT} -l ${LOGFILE} -e -o ${REPORTDIR} \
     -Djava.rmi.server.hostname=${SERVERIP} -Dclient.rmi.localport=60000 -R${SLAVEIPS} 
 
-chmod -R 755 ${REPORTDIR}
+sudo  chmod -R 755 ${REPORTDIR}
