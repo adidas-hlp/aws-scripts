@@ -13,7 +13,13 @@ for slave in ${SLAVEIPS}
 do
   echo -en "Processing $slave"
   scp -i /home/ubuntu/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /input-data/* ${slave}:/input-data/ >/dev/null 2>&1
-  echo "."
+  if [ $? -eq 0 ]
+  then
+    echo "."
+  else
+    echo "ERROR: cant copy to the slave $i ..."
+    exit 1
+  fi
 done
 unset IFS
 
