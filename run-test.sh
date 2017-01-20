@@ -12,7 +12,7 @@ export IFS=","
 for slave in ${SLAVEIPS}
 do
   echo -en "Processing $slave"
-  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /input-data/* ${slave}:/input-data/ >/dev/null 2>&1
+  scp -i /home/ubuntu/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /input-data/* ${slave}:/input-data/ >/dev/null 2>&1
   echo "."
 done
 unset IFS
