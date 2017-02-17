@@ -28,11 +28,22 @@ unset IFS
 TESTSCRIPT=$jmxfile
 SERVERIP=$( ip addr show dev eth0 | awk  '/inet / {print $2}' | cut -d "/" -f 1)
 SLAVEIPS=$( /usr/local/bin/get-slaves-ip.sh )
-REPORTDIR=$( mktemp -d -p /logs)
+
+if [ "x${REPORTDIR}" == "x" ]; then
+  REPORTDIR=$( mktemp -d -p /logs)
+else
+  REPORTDIR=/logs/${REPORTDIR// /_}_$(date +%Y%m%d_%h%M)
+  if [ -d ${REPORTDIR} ]; then
+    echo "ERROR: ${REPORTDIR} exists already"
+    exit 1
+  else
+    mkdir -p ${REPORTDIR}
+fi
+
 LOGFILE=${REPORTDIR}.log
 JTLFILE=${REPORTDIR}.jtl
-count=$( docker ps -a | wc -l )
 
+count=$( docker ps -a | wc -l )
 if [ $count -gt 1 ]
 then
   docker rm master  
