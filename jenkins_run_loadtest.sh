@@ -32,7 +32,8 @@ SLAVEIPS=$( /usr/local/bin/get-slaves-ip.sh )
 if [ "x${REPORTDIR}" = "x" ]; then
   REPORTDIR=$( mktemp -d -p /logs)
 else
-  REPORTDIR=/logs/${REPORTDIR// /_}_$(date +%Y%m%d_%h%M)
+  REPORTDIR=$(echo ${REPORTDIR} |  sed "s/[ -\/?]/_/g" )
+  REPORTDIR=/logs/${REPORTDIR}_$(date +%Y%m%d_%h%M)
   if [ -d ${REPORTDIR} ]; then
     echo "ERROR: ${REPORTDIR} exists already"
     exit 1
