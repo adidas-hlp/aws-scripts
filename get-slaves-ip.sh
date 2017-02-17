@@ -12,7 +12,7 @@ while (( "$#" )); do
     iptype="PublicIpAddress"
     continue
   fi
-  as_group_name="${1}"
+  as_group_name="${1:-$as_group_name}"
   shift
 done
 
