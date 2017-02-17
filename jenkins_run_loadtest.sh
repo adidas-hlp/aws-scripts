@@ -38,6 +38,7 @@ else
     exit 1
   else
     mkdir -p ${REPORTDIR}
+  fi
 fi
 
 LOGFILE=${REPORTDIR}.log
