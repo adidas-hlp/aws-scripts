@@ -29,7 +29,7 @@ TESTSCRIPT=$jmxfile
 SERVERIP=$( ip addr show dev eth0 | awk  '/inet / {print $2}' | cut -d "/" -f 1)
 SLAVEIPS=$( /usr/local/bin/get-slaves-ip.sh )
 
-if [ "x${REPORTDIR}" == "x" ]; then
+if [ "x${REPORTDIR}" = "x" ]; then
   REPORTDIR=$( mktemp -d -p /logs)
 else
   REPORTDIR=/logs/${REPORTDIR// /_}_$(date +%Y%m%d_%h%M)
