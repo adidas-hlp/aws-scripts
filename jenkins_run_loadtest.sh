@@ -56,6 +56,6 @@ then
   fi
 fi
 
-docker run --rm  --name master -v /tmp/:/tmp/ -v /input-data:/input-data -v /logs/:/logs --rm -p 60000:4000 --name master confirmed/jmeter-master   /var/lib/apache-jmeter/bin/jmeter -n -t /input-data/${TESTSCRIPT} -l ${JTLFILE} -j ${LOGFILE} -e -o ${REPORTDIR} -Djava.rmi.server.hostname=${SERVERIP} -Dclient.rmi.localport=60000 -R${SLAVEIPS}
+docker run --rm  --name master -v /tmp/:/tmp/ -v /input-data:/input-data -v /logs/:/logs --rm -p 60000:4000 --name master confirmed/jmeter-master   /var/lib/apache-jmeter/bin/jmeter -n -t /input-data/${TESTSCRIPT} -l ${JTLFILE} -j ${LOGFILE} -e -o ${REPORTDIR} -Djava.rmi.server.hostname=${SERVERIP} -Dclient.rmi.localport=4000 -R${SLAVEIPS}
 
 sudo chmod -R 755 ${REPORTDIR}
